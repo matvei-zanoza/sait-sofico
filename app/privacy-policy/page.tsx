@@ -65,7 +65,7 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="bg-background">
+    <div className="bg-background pt-20">
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">

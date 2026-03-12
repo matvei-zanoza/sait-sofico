@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { getDeployEnv, getSiteUrl } from "@/lib/env"
 
-export const SITE_NAME = "SoFiCo Services Limited"
+export const SITE_NAME = "SoFiCo"
 
 export function getGlobalRobotsMetadata(): Metadata["robots"] {
   const deployEnv = getDeployEnv()
@@ -30,28 +30,28 @@ export function createRootMetadata(): Metadata {
   return {
     metadataBase: siteUrl,
     title: {
-      default: `${SITE_NAME} | B2B Trade Operations`,
+      default: `${SITE_NAME} | Precision in Global Trade`,
       template: `%s | ${SITE_NAME}`,
     },
     description:
-      "B2B Trade Operations & Structured Coordination. Operational coordination, supplier alignment, and documentation support for cross-border trade.",
+      "Operational coordination and structured support for enterprises engaged in international commerce. B2B trade operations, supplier alignment, and documentation support.",
     applicationName: SITE_NAME,
     openGraph: {
       type: "website",
       siteName: SITE_NAME,
       title: {
-        default: `${SITE_NAME} | B2B Trade Operations`,
+        default: `${SITE_NAME} | Precision in Global Trade`,
         template: `%s | ${SITE_NAME}`,
       },
       description:
-        "Operational coordination, supplier alignment, and documentation support for cross-border trade.",
+        "Operational coordination and structured support for enterprises engaged in international commerce.",
       url: siteUrl,
       images: [
         {
-          url: "/placeholder.jpg",
+          url: "/og.png",
           width: 1200,
           height: 630,
-          alt: SITE_NAME,
+          alt: `${SITE_NAME} - Precision in Global Trade`,
         },
       ],
     },
