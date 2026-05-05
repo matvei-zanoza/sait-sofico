@@ -1,95 +1,106 @@
-import type { Metadata } from "next"
-import { ContactForm } from "@/components/contact-form"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Contact | SoFiCo Services Limited",
-  description: "Request a business introduction or contact SoFiCo Services Limited.",
-}
+import { ContactForm } from "@/components/contact-form"
+import { Mail, Clock, FileText } from "lucide-react"
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/scroll-animation"
+
+const infoCards = [
+  {
+    icon: Mail,
+    title: "Communication Policy",
+    description: "Communication is conducted via corporate email only. We do not accept inquiries via personal email addresses or social media.",
+  },
+  {
+    icon: Clock,
+    title: "Response Time",
+    description: "We review inquiries as part of standard business operations. Response times vary depending on inquiry nature and completeness.",
+  },
+  {
+    icon: FileText,
+    title: "Inquiry Scope",
+    description: "We accept inquiries related to operational coordination, supplier alignment, and trade documentation support services.",
+  },
+]
 
 export default function ContactPage() {
   return (
-    <div className="bg-background">
-      {/* Header Section */}
+    <div className="bg-background pt-20">
+      {/* Hero Section */}
       <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground lg:text-5xl text-balance">
+        <ScrollAnimation animation="fade-up">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <span className="inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">
+              Get in Touch
+            </span>
+            <h1 className="mt-8 font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-foreground leading-[1.1]">
               Contact
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Request a business introduction or submit an inquiry. All communications 
-              are conducted via corporate email only.
+            <div className="mt-8 h-px w-16 bg-accent mx-auto" />
+            <p className="mt-8 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Request a business introduction or submit an inquiry.
             </p>
           </div>
+        </ScrollAnimation>
+      </section>
+
+      {/* Info Cards */}
+      <section className="py-12 border-t border-border">
+        <div className="mx-auto max-w-6xl px-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {infoCards.map((card, index) => (
+              <StaggerItem key={card.title} index={index}>
+                <div className="h-full p-6 md:p-8 bg-card border border-border">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                      <card.icon className="h-4 w-4 text-accent" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-base font-serif text-foreground">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            {/* Form */}
-            <div className="lg:col-span-7">
-              <div className="border border-border rounded-2xl p-8 bg-card">
-                <h2 className="text-xl font-semibold text-foreground">
-                  Business Inquiry Form
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <ScrollAnimation animation="fade-up">
+            <div className="p-8 md:p-12 bg-card border border-border">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-serif text-foreground">
+                  Business Inquiry
                 </h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Please complete the form below to submit an inquiry.
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Complete the form below to submit an inquiry.
                 </p>
-                <ContactForm />
               </div>
+              <ContactForm />
             </div>
-
-            {/* Information */}
-            <div className="lg:col-span-5">
-              <div className="space-y-6">
-                <div className="border border-border rounded-2xl p-6 bg-muted/30">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Communication Policy
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    Communication is conducted via corporate email only. We do not 
-                    accept inquiries via personal email addresses or social media channels.
-                  </p>
-                </div>
-
-                <div className="border border-border rounded-2xl p-6 bg-muted/30">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Response Time
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    We review inquiries as part of our standard business operations.
-                    Response times may vary depending on the nature and completeness of the inquiry.
-                  </p>
-                </div>
-
-                <div className="border border-border rounded-2xl p-6 bg-muted/30">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Inquiry Scope
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    We accept inquiries related to operational coordination, supplier 
-                    alignment, and trade documentation support services. We do not 
-                    provide financial, legal, or regulatory advice.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Disclaimer */}
-      <section className="py-12 bg-muted/30 border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-xs text-muted-foreground leading-relaxed max-w-4xl">
-            Submission of an inquiry does not create a client relationship or contractual 
-            obligation. All information provided will be handled in accordance with our 
-            privacy policy. We reserve the right to decline inquiries at our discretion.
-          </p>
-        </div>
-      </section>
+      <ScrollAnimation animation="fade-in">
+        <section className="py-16 bg-card border-y border-border">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <p className="text-sm text-muted-foreground/70 leading-relaxed">
+              Submission of an inquiry does not create a client relationship or contractual 
+              obligation. All information provided will be handled in accordance with our 
+              privacy policy. We reserve the right to decline inquiries at our discretion.
+            </p>
+          </div>
+        </section>
+      </ScrollAnimation>
     </div>
   )
 }

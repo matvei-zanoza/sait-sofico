@@ -1,16 +1,30 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { GSAPProvider } from '@/components/gsap-provider'
 import { createRootMetadata } from '@/lib/metadata'
 
 const inter = Inter({ 
   subsets: ["latin"],
-  variable: '--font-inter'
-});
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: '--font-playfair',
+  display: 'swap',
+})
 
 export const metadata: Metadata = createRootMetadata()
+
+export const viewport: Viewport = {
+  themeColor: '#000000',
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
@@ -18,13 +32,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${inter.variable} ${playfair.variable} font-sans`} suppressHydrationWarning>
+        <GSAPProvider>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </GSAPProvider>
       </body>
     </html>
   )

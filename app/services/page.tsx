@@ -1,180 +1,140 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Cog, Users, FileText, Globe, ArrowRightLeft, Code } from "lucide-react"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Services | SoFiCo Services Limited",
-  description: "Operational coordination services including equipment sourcing, supplier coordination, and trade structuring.",
-}
+import Link from "next/link"
+import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/scroll-animation"
 
 const services = [
   {
-    id: "equipment-sourcing",
-    title: "Structured Equipment Sourcing",
-    icon: Cog,
-    description: "Coordinated approach to equipment procurement with verified supplier networks.",
-    details: [
-      "Specification alignment and documentation",
-      "Vendor identification and coordination",
-      "Quality requirement structuring",
-      "Procurement workflow support",
-    ],
+    id: "01",
+    title: "Electronic Product Development",
+    slug: "electronic-product-development",
+    description: "End-to-end electronic product development services from concept to production-ready designs.",
+    details: ["Concept development", "Prototyping", "Testing & validation", "Production preparation"],
   },
   {
-    id: "supplier-coordination",
-    title: "Supplier Coordination",
-    icon: Users,
-    description: "Alignment of supplier requirements and operational specifications.",
-    details: [
-      "Multi-party coordination support",
-      "Specification documentation",
-      "Communication facilitation",
-      "Workflow alignment",
-    ],
+    id: "02",
+    title: "Electronic Design",
+    slug: "electronic-design",
+    description: "Professional electronic design services including circuit design, PCB layout, and system integration.",
+    details: ["Circuit design", "PCB layout", "System integration", "Design verification"],
   },
   {
-    id: "commercial-alignment",
-    title: "Commercial Alignment",
-    icon: FileText,
-    description: "Documentation sequencing and process structuring for commercial alignment.",
-    details: [
-      "Documentation sequencing",
-      "Commercial term structuring",
-      "Process documentation",
-      "Operational workflow support",
-    ],
+    id: "03",
+    title: "Tooling and Mould Manufacturing",
+    slug: "tooling-mould-manufacturing",
+    description: "Precision tooling and mould manufacturing for electronic enclosures and component housings.",
+    details: ["Injection moulds", "Precision tooling", "Enclosure design", "Quality assurance"],
   },
   {
-    id: "trade-structuring",
-    title: "International Trade Structuring",
-    icon: Globe,
-    description: "Operational coordination for cross-border trade documentation.",
-    details: [
-      "Cross-border documentation support",
-      "Trade flow coordination",
-      "Documentation alignment",
-      "Operational process structuring",
-    ],
+    id: "04",
+    title: "Electronic Procurement",
+    slug: "electronic-procurement",
+    description: "Strategic sourcing and procurement of electronic components from verified suppliers worldwide.",
+    details: ["Component sourcing", "Supplier verification", "Cost optimization", "Supply chain management"],
   },
   {
-    id: "cross-border-coordination",
-    title: "Cross-Border Operational Coordination",
-    icon: ArrowRightLeft,
-    description: "Support for structured cross-border documentation workflows and documentation sequences.",
-    details: [
-      "Documentation support",
-      "Multi-jurisdictional coordination",
-      "Workflow documentation",
-      "Process sequencing",
-    ],
-  },
-  {
-    id: "software-development",
-    title: "Software Development for Trade Operations",
-    icon: Code,
-    description: "Custom software solutions for trade operations management.",
-    details: [
-      "Trade operations platforms",
-      "Documentation management systems",
-      "Workflow automation tools",
-      "Integration solutions",
-    ],
+    id: "05",
+    title: "Electronic Manufacturing",
+    slug: "electronic-manufacturing",
+    description: "Full-scale electronic manufacturing services including assembly, testing, and quality control.",
+    details: ["PCB assembly", "Product assembly", "Quality testing", "Volume production"],
   },
 ]
 
 export default function ServicesPage() {
   return (
-    <div className="bg-background">
-      {/* Header Section */}
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground lg:text-5xl text-balance">
-              Services
+    <div className="bg-background pt-20">
+      {/* Hero Section */}
+      <section className="py-24 lg:py-32">
+        <ScrollAnimation animation="fade-up">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <span className="inline-block text-xs font-medium uppercase tracking-[0.2em] text-accent">
+              What We Offer
+            </span>
+            <h1 className="mt-8 font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-foreground leading-[1.1]">
+              Our Services
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Comprehensive operational coordination services for B2B trade activities. 
-              Our services focus on coordination, documentation, and process structuring.
+            <div className="mt-8 h-px w-16 bg-accent mx-auto" />
+            <p className="mt-8 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Comprehensive operational coordination services for B2B trade activities.
             </p>
           </div>
-        </div>
+        </ScrollAnimation>
       </section>
 
-      {/* Services List */}
-      <section className="pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="space-y-12">
+      {/* Services Grid */}
+      <section className="py-16 lg:py-20 border-t border-border">
+        <div className="mx-auto max-w-6xl px-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, index) => (
-              <div
-                key={service.id}
-                className={`border border-border rounded-2xl p-8 ${
-                  index % 2 === 0 ? "bg-card" : "bg-muted/30"
-                }`}
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <service.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-foreground">
-                      {service.title}
-                    </h2>
-                    <p className="mt-3 text-muted-foreground leading-relaxed">
-                      {service.description}
-                    </p>
-                    <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {service.details.map((detail) => (
-                        <li
-                          key={detail}
-                          className="flex items-center gap-2 text-sm text-muted-foreground"
-                        >
-                          <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
+              <StaggerItem key={service.id} index={index}>
+                <div id={service.slug} className="h-full p-8 md:p-10 bg-card border border-border hover:border-accent/30 transition-colors scroll-mt-24">
+                  <div className="flex items-start gap-4">
+                    <span className="text-3xl font-serif text-accent/60">{service.id}</span>
+                    <div className="flex-1">
+                      <h2 className="text-xl md:text-2xl font-serif text-foreground">
+                        {service.title}
+                      </h2>
+                      <p className="mt-4 text-muted-foreground leading-relaxed">
+                        {service.description}
+                      </p>
+                      <ul className="mt-6 space-y-2">
+                        {service.details.map((detail) => (
+                          <li key={detail} className="text-sm text-muted-foreground/70 flex items-center gap-2">
+                            <CheckCircle2 className="h-4 w-4 text-accent/60 flex-shrink-0" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Disclaimer */}
-      <section className="py-12 bg-muted/30 border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="border border-border rounded-2xl p-6 bg-card">
-            <h3 className="text-sm font-semibold text-foreground">Important Notice</h3>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+      <ScrollAnimation animation="fade-in">
+        <section className="py-16 bg-card border-y border-border">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Not a licensed bank. Not a financial institution. No custody of client funds. 
               Services are limited to operational coordination and documentation support. 
               SoFiCo Services Limited does not provide payment processing, financial advisory, 
               or regulated financial services of any kind.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollAnimation>
 
       {/* CTA */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild className="rounded-xl">
-              <Link href="/contact">
-                Request a Business Introduction
-                <ArrowRight className="ml-2 h-4 w-4" />
+      <ScrollAnimation animation="fade-up">
+        <section className="py-24 lg:py-32">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <h2 className="font-serif text-4xl sm:text-5xl font-normal text-foreground">
+              Ready to Get Started?
+            </h2>
+            <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Link 
+                href="/contact" 
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-xs font-medium uppercase tracking-widest bg-white text-black transition-all duration-200 hover:bg-accent hover:text-white"
+              >
+                Request Introduction
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-            </Button>
-            <Button asChild variant="outline" className="rounded-xl">
-              <Link href="/how-we-work">
-                Learn How We Work
+              <Link 
+                href="/how-we-work" 
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-xs font-medium uppercase tracking-widest border border-white/30 text-white transition-all duration-200 hover:border-white hover:bg-white/10"
+              >
+                Learn Our Process
               </Link>
-            </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollAnimation>
     </div>
   )
 }
